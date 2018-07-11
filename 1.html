@@ -1,0 +1,691 @@
+<meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'
+/>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width = device-width, user-scalable=no minimum-scale=1.0 maximum-scale=1.0" />
+    <title>Summoners War</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html,
+    body {
+        background: #fff;
+        width: 100%;
+        font-size: 100%;
+        font-family: Arial, arial, sans-serif;
+        height: 100%;
+    }
+
+    .videoContent {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        top: 0;
+        background-position: 100%;
+    }
+
+    .filters {
+        -webkit-filter: blur(15px);
+        -moz-filter: blur(15px);
+        -o-filter: blur(15px);
+        -ms-filter: blur(15px);
+        filter: blur(15px);
+    }
+
+    @media all and (orientation: landscape) {
+        .close-btn {
+            position: absolute;
+            display: block;
+            width: 1.25rem;
+            height: 1.25rem;
+            z-index: 11;
+            top: 0.8rem;
+            right: 1.25rem;
+        }
+        .content {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .head {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            border: none;
+        }
+        #loading {
+            display: block;
+            width: 12%;
+            animation: loads 1s linear infinite;
+            -webkit-animation: loads 1s linear infinite;
+            opacity: 0.8;
+            position: absolute;
+            z-index: 10;
+            top: -1000px;
+            height: auto;
+            margin: 0 auto;
+        }
+        #iconplay {
+            display: none;
+            width: 12%;
+            opacity: 0.8;
+            position: absolute;
+            z-index: 10;
+            top: -1000px;
+            height: auto;
+            margin: 0 auto;
+        }
+        #videoContentdev {
+            width: 100%;
+            overflow: hidden;
+            height: 100%;
+        }
+        .head-sec {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+        .dec-box {
+            background-color: rgba(0, 0, 0, .4);
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.75em 1.2em;
+            bottom: 0;
+            left: 0;
+            z-index: 2
+        }
+        .dec-box {
+            display: block;
+        }
+        .dec-port {
+            display: none;
+        }
+        .dec-box .img-icon {
+            height: 3.75em;
+            width: 3.75em;
+            position: absolute;
+            left: 0;
+            top: 0.125em;
+        }
+        .dec-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        .img-icon-btn {
+            height: 3.125em;
+            width: 3.125em;
+            position: absolute;
+            right: 0;
+            top: 0.425em;
+        }
+        .dec-box .dec-content {
+            width: 100%;
+            box-sizing: border-box;
+            height: 4.065em;
+            padding-right: 8.5em;
+            padding-left: 5em;
+            color: #fff
+        }
+        .dec-content h4 {
+            font-size: 1em;
+            overflow: hidden;
+            font-weight: bold;
+            text-overflow: ellipsis;
+            padding: 3px 0 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dec-box .dec-content p {
+            margin: 0;
+            margin-top: 0.5em;
+            font-size: 0.875em;
+            overflow: hidden;
+        }
+        .dec-box .dec-content a.a-btn {
+            background: #0f9d58;
+            border-radius: 0.375em;
+            display: block;
+            line-height: 2.5125em;
+            width: 6.875em;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1.125em;
+            color: #fff;
+            position: absolute;
+            right: 0;
+            top: 0.67em;
+        }
+    }
+
+    @media all and (orientation: portrait) {
+        .close-btn {
+            position: absolute;
+            display: block;
+            width: 1.25rem;
+            height: 1.25rem;
+            z-index: 11;
+            top: 0.8rem;
+            right: 1.25rem;
+        }
+        #iconplay {
+            display: none;
+            width: 20%;
+            opacity: 0.8;
+            position: absolute;
+            z-index: 10;
+            top: -1000px;
+            height: auto;
+            margin: 0 auto;
+        }
+        #loading {
+            display: block;
+            opacity: 0.8;
+            -webkit-animation: loads 1s linear infinite;
+            animation: loads 1s linear infinite;
+            width: 20%;
+            position: absolute;
+            z-index: 10;
+            top: -1000px;
+            height: auto;
+            margin: 0 auto;
+        }
+        /* #videoContent {      height: 11.25em;      position: relative;    } */
+        .dec-box {
+            display: none;
+        }
+        .dec-port {
+            display: block;
+        }
+        .content {
+            width: 100%;
+            display: block;
+            height: 100%;
+            background: #fff;
+            position: relative;
+        }
+        #videoMar {
+            height: 100%;
+            margin: 0 auto;
+        }
+        .head {
+            height: 100%;
+            border: none;
+        }
+        .icon1 {
+            margin: 11% auto 0;
+            height: auto;
+            display: block;
+        }
+        @media screen and (min-width: 320px) {
+            .icon1 {
+                margin: 14% auto 0;
+                width: 4.5em;
+                height: 4.5em;
+                display: block;
+            }
+        }
+        @media screen and (min-width: 375px) {
+            .icon1 {
+                margin: 15% auto 0;
+                width: 5.25em;
+                height: 5.25em;
+                display: block;
+            }
+        }
+        @media screen and (min-width: 414px) {
+            .icon1 {
+                margin: 16% auto 0;
+                width: 5.65em;
+                height: 5.65em;
+                display: block;
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .icon1 {
+                margin: 16% auto 0;
+                width: 10.625em;
+                height: 10.625em;
+                display: block;
+            }
+        }
+        @media screen and (min-width: 1000px) {
+            .icon1 {
+                margin: 16% auto 0;
+                width: 12.5em;
+                height: 12.5em;
+                display: block;
+            }
+        }
+        P {
+            margin-top: 1.25em;
+            width: 100%;
+            text-align: center;
+            font-size: 1em;
+        }
+        .btn-box {
+            position: fixed;
+            width: 100%;
+            padding: 0 1.25em;
+            box-sizing: border-box;
+            left: 0;
+            bottom: 5%;
+        }
+        button {
+            width: 100%;
+            border-radius: 4px;
+            height: 2.8125em;
+            background-color: #0f9d58;
+            color: #fff;
+            border: none;
+            font-size: 1em;
+            display: block;
+        }
+        .showregular {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+            overflow: hidden;
+        }
+        .title {
+            -webkit-line-clamp: 1;
+            padding: 0 1.25em;
+            box-sizing: border-box;
+        }
+        .text {
+            -webkit-line-clamp: 2;
+            font-size: 0.875em;
+            padding: 0 1.25em;
+            color: #666;
+            box-sizing: border-box;
+            line-height: 1.5;
+        }
+        a {
+            text-decoration: none;
+        }
+        @media screen and (min-width: 768px) {
+            button {
+                height: 3.725em;
+                margin: 17.5% auto 0;
+                font-size: 1.5em;
+            }
+            P {
+                font-size: 1.25em;
+                padding: 0 3.125em;
+            }
+            .text {
+                font-size: 1.125em;
+                padding: 0 3.125em;
+            }
+        }
+        @media screen and (min-width: 1000px) {
+            button {
+                height: 4em;
+                font-size: 1.725em;
+            }
+            P {
+                font-size: 1.7em;
+                padding: 0 80px;
+            }
+            .text {
+                font-size: 1.5em;
+                padding: 0 80px;
+            }
+        }
+    }
+
+    video {
+        position: relative;
+        justify-content: content;
+        z-index: 2;
+        transition: all 0.3s;
+        object-fit: fill;
+        margin: 0 auto;
+        display: block;
+    }
+
+    #videoContent {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .AD-icon {
+        height: 0.75em;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 99;
+    }
+
+    @keyframes loads {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes loads {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    /* @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {    body{padding-top:44px;padding-bottom: 34px;}    body:before{content:鈥?display:block;position: fixed;width:100%;height:44px;background-color: #000;top:0;left: 0;z-index:9999;}    body:after{content:鈥?display:block;position: fixed;width:100%;height:34px;bottom:0;left: 0;z-index:9999;}  }  */
+</style>
+<script type="text/javascript">
+    function go() {
+        var sr = "2";
+        if ("3" == sr) {
+            window.open(
+                "https://api5.batmobi.net/call/v2/ad/click?ads_id=25294152&recommend_id=5900000&click_route=5&sequence=1&aff_id=1001575&ak_id=12185&local=US&from_sdk=1&sr=2&adsrc=1&btid=5e830698-5ba5-4a73-8f19-f8adeac56b22&channel=200&aid=9B55DD18-3A56-4347-8E55-4475C2269D7D&adv_id=9B55DD18-3A56-4347-8E55-4475C2269D7D&placement_id=12185_78849&oid=f8210efc-1567-4bac-aa41-896f457b74c9&uu_cct=1"
+            );
+        } else {
+            window.location.href =
+                "https://api5.batmobi.net/call/v2/ad/click?ads_id=25294152&recommend_id=5900000&click_route=5&sequence=1&aff_id=1001575&ak_id=12185&local=US&from_sdk=1&sr=2&adsrc=1&btid=5e830698-5ba5-4a73-8f19-f8adeac56b22&channel=200&aid=9B55DD18-3A56-4347-8E55-4475C2269D7D&adv_id=9B55DD18-3A56-4347-8E55-4475C2269D7D&placement_id=12185_78849&oid=f8210efc-1567-4bac-aa41-896f457b74c9&uu_cct=1";
+        };
+    };
+</script>
+
+<body style="background: #000;">
+    <div class="content" style="background: #fff;" id="box">
+        <div id="videoContent">
+            <div class="videoContent filters" style="background:url(https://icdn.batmobi.net/appstore/richmedia/20170310/2sa9lmk07wlcc0w74rekuub7_852912420_1200x627.jpg)"></div>
+            <img src="https://icdn.batmobi.net/appstore/richmedia/20180604/7ujv2zk230ndol6bddmud4yj_play.png" id="iconplay"
+                alt="">
+            <img src="https://icdn.batmobi.net/appstore/richmedia/20180607/jwjxt1f3en3dhkniyukxl943_loading.png" id="loading"
+                alt="">
+            <video id="videobox" controls width="auto" height="1" src="https://mdn.github.io/html-examples/link-rel-preload/video/sintel-short.mp4"
+                x-webkit-airplay="true" playsinline="true" webkit-playsinline x5-playsinline></video>
+        </div>
+        <div class="dec-port">
+            <a href="javascript:void(0);">
+                <img class="icon1" src="https://oscdn.batmobi.net/image/thumb/Purple69/v4/0b/d8/10/0bd810ae-9ed0-b1a1-0c61-0f10e1ef14a7/source/60x60bb.jpg"
+                    onerror="this.src='https://icdn.batmobi.net/appstore/richmedia/20171103/01yzdr6j81f0wjcxhsca73n8_icon.png'"> </a>
+            <p class="showregular title">Summoners War</p>
+            <p class="showregular text">"An action-packed fantasy RPG with over 50 million Summoners around the world!Jump into the Sky Ar...</p>
+            <a
+                href="javascript:void(0);" class="btn-box">
+                <button id="bathbtn" onclick="go();">Install</button>
+                </a>
+        </div>
+        <div class="dec-box">
+            <div style="position:relative">
+                <img class="img-icon" onerror="this.src='https://icdn.batmobi.net/appstore/richmedia/20171103/01yzdr6j81f0wjcxhsca73n8_icon.png'"
+                    src="https://oscdn.batmobi.net/image/thumb/Purple69/v4/0b/d8/10/0bd810ae-9ed0-b1a1-0c61-0f10e1ef14a7/source/60x60bb.jpg"
+                    alt="">
+                <div class="dec-content">
+                    <h4>Summoners War</h4>
+                    <p class="dec-text">"An action-packed fantasy RPG with over 50 million Summoners around the world!Jump into the Sky Ar...</p>
+                    <a class="a-btn" onclick="go();" href="javascript:void(0)">Install</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="https://icdn.batmobi.net/appstore/richmedia/20180604/7ujv2zk230ndol6bddmud4yj_play.png" style="display: none;"
+        alt="">
+    <img src="https://icdn.batmobi.net/appstore/richmedia/20171103/01yzdr6j81f0wjcxhsca73n8_icon.png" style="display: none;"
+        alt="">
+</body>
+<script>
+    function setVideoLoadPlay(open, muted) {
+        var obj = {
+            loadState: false,
+            start: false,
+            init: function () {
+                var d = document.clientHeight || document.body.clientHeight;
+                var w = document.clientWidth || document.body.clientWidth;
+                var video = document.getElementById("videobox");
+                video.style.opacity = 0;
+                if (w > d) {
+                    document.getElementById("videoContent").style.height = d + 'px';
+                } else {
+                    document.getElementById("videoContent").style.height = 9 / 16 * w + "px";
+                };
+                if (muted === 1) {
+                    video.muted = true;
+                };
+                if (open === "1") {
+                    video.play();
+                };
+                video.preload = "auto";
+                if (open === "1" && document['hidden']) {
+                    video.pause();
+                };
+                var port = window || document;
+                port.addEventListener('visibilityChange', function () {
+                    if (document['hidden']) {
+                        video.pause();
+                    } else {
+                        video.play();
+                    };
+                }, false);
+                setInterval(function () {
+                    if (open === "1") {
+                        if (document['hidden'] && !video.paused) {
+                            video.pause();
+                        } else if (video.paused) {
+                            video.play();
+                            clearInterval(timer)
+                        };
+                    };
+                }, 100);
+                obj.videobg = document.querySelector('.videoContent').style.background;
+                video.onwaiting = function () {
+                    obj.loadState = true;
+                    obj.IconLoad();
+                };
+                video.addEventListener("playing", function () {
+                    if (obj.start) {
+                        if (video.readyState == 3) {
+                            obj.loadState = false;
+                            video.style.opacity = 1;
+                            document.getElementById("loading").style.top = -1000 + "px";
+                        } else if (video.readyState == 2 || video.readyState == 0) {
+                            obj.loadState = true;
+                            obj.IconLoad();
+                        } else if (video.readyState == 4) {
+                            video.style.opacity = 1;
+                            obj.loadState = false;
+                            document.getElementById("loading").style.top = -1000 + "px";
+                        };
+                    };
+                });
+                video.addEventListener("play", function () {
+                    obj.videobgChange(video);
+                    document.getElementById("videobox").style.display = "block";
+                    document.getElementById("iconplay").style.display = "none";
+                    obj.loadState = true;
+                    obj.IconLoad();
+                    var cur = setInterval(function () {
+                        if (video.currentTime > 0.1) {
+                            obj.start = true;
+                            obj.loadState = false;
+                            video.style.opacity = 1;
+                            document.getElementById("loading").style.top = -1000 + "px";
+                            clearInterval(cur);
+                        };
+                    }, 200);
+                });
+                video.addEventListener("pause", function () {
+                    if (muted === 1) {
+                        video.muted = true;
+                    } else {
+                        if (video.muted) {
+                            video.muted = false;
+                        };
+                    };
+                    document.getElementById("videobox").style.display = "block";
+                    document.getElementById("iconplay").style.display = "block";
+                    iconbuilded();
+                    document.getElementById("loading").style.top = -1000 + "px";
+                });
+                video.addEventListener("ended", function () {
+                    iconbuilded();
+                    document.getElementById("iconplay").style.display = "block";
+                });
+                if (d == 480) {
+                    document.getElementById("bathbtn").style.marginTop = "10.8%";
+                };
+                iconbuilded();
+                port.onresize = function () {
+                    d = document.clientHeight || document.body.clientHeight;
+                    w = document.clientWidth || document.body.clientWidth;
+                    if (w > d) {
+                        document.getElementById("videoContent").style.height = d + 'px';
+                    } else {
+                        document.getElementById("videoContent").style.height = 9 / 16 * w + "px";
+                    };
+                    iconbuilded();
+                    obj.videoFir(video);
+                    if (obj.loadState) {
+                        obj.IconLoad();
+                    };
+                };
+
+                function iconbuilded() {
+                    var d = document.clientHeight || document.body.clientHeight;
+                    var w = document.clientWidth || document.body.clientWidth;
+                    if (w > d) {
+                        obj.iconbuild(true);
+                    } else {
+                        obj.iconbuild();
+                    };
+                };
+                obj.videoFir(video);
+                document.getElementById("iconplay").onclick = function () {
+                    video.play();
+                };
+                document.getElementById("iconplay").style.display = "block";
+            },
+            IconLoad: function () {
+                var w = document.clientWidth || document.body.clientWidth;
+                var d = document.clientHeight || document.body.clientHeight;
+                var loadIcon = document.getElementById("loading");
+                if (w > d) {
+                    document.getElementById("videoContent").style.height = d + 'px';
+                    loadIcon.onload = function () {
+                        h = loadIcon.height ? loadIcon.height : loadIcon.clientHeight;
+                        loadIcon.style.top = (d - h) / 2 + "px";
+                        loadIcon.style.left = (w - h) / 2 + "px";
+                    };
+                    if (loadIcon.complete) {
+                        h = loadIcon.height ? loadIcon.height : loadIcon.clientHeight;
+                        var vh = document.getElementById("videoContent").style.height;
+                        loadIcon.style.top = (d - h) / 2 + "px";
+                        loadIcon.style.left = (w - h) / 2 + "px";
+                    };
+                } else {
+                    document.getElementById("videoContent").style.height = 9 / 16 * w + "px";
+                    loadIcon.onload = function () {
+                        h = loadIcon.height ? loadIcon.height : loadIcon.clientHeight;
+                        var vh = document.getElementById("videoContent").style.height;
+                        vh = parseFloat(vh.replace('px', ''));
+                        loadIcon.style.top = (vh - h) / 2 + "px";
+                        loadIcon.style.left = (w - h) / 2 + "px";
+                    };
+                    if (loadIcon.complete) {
+                        h = loadIcon.height ? loadIcon.height : loadIcon.clientHeight;
+                        var vh = document.getElementById("videoContent").style.height;
+                        vh = parseFloat(vh.replace('px', ''));
+                        loadIcon.style.top = (vh - h) / 2 + "px";
+                        loadIcon.style.left = (w - h) / 2 + "px";
+                    };
+                };
+            },
+            videobgChange: function (video) {
+                var w = document.clientWidth || document.body.clientWidth;
+                if (video.width < w) {
+                    document.querySelector('.videoContent').style.background = '#000';
+                    document.querySelector('.videoContent').className = 'videoContent';
+                } else {
+                    document.querySelector('.videoContent').style.background = obj.videobg;
+                    document.querySelector('.videoContent').className = 'videoContent filters';
+                };
+            },
+            iconbuild: function (t) {
+                var icon = document.getElementById("iconplay");
+                var w = document.clientWidth || document.body.clientWidth;
+                var d = document.clientHeight || document.body.clientHeight;
+                if (w > d) {
+                    document.getElementById("videoContent").style.height = d + 'px';
+                } else {
+                    document.getElementById("videoContent").style.height = 9 / 16 * w + "px";
+                };
+                var d = 9 / 16 * w;
+                if (t) {
+                    d = document.clientHeight || document.body.clientHeight;
+                };
+                icon.onload = function () {
+                    var h = icon.clientWidth;
+                    icon.style.top = (d - h) / 2 + "px";
+                    icon.style.left = (w - h) / 2 + "px";
+                };
+                if (icon.complete) {
+                    var h = icon.height ? icon.height : icon.clientWidth;
+                    icon.style.top = (d - h) / 2 + "px";
+                    icon.style.left = (w - h) / 2 + "px";
+                };
+                document.getElementById("videoContent").style.display = "block";
+            },
+            videobg: '#000',
+            videoFir: function (video, f) {
+                function loadVideo() {
+                    var w = document.clientWidth || document.body.clientWidth;
+                    var d = document.clientHeight || document.body.clientHeight;
+                    if (video.readyState > 0) {
+                        video.width = (1280 / 720) * (9 / 16 * w);
+                        video.height = 9 / 16 * w;
+                        if (w > d) {
+                            console.log(video.height);
+                            console.log(d);
+                            video.style.top = (d - video.height) / 2 + 'px';
+                        } else {
+                            video.style.top = 0 + 'px';
+                        };
+                        if (w > d) {
+                            document.getElementById("videoContent").style.height = d + 'px';
+                        } else {
+                            document.getElementById("videoContent").style.height = 9 / 16 * w + "px";
+                        };
+                        clearInterval(videoloadIn);
+                    };
+                };
+                var videoloadIn = setInterval(loadVideo, 500);
+            },
+            play: function () {
+                var video = document.getElementById("videobox");
+                video.play();
+            }
+        };
+        obj.init();
+    };
+    setVideoLoadPlay(zz_client_autoplayFlag = '1', 1);
+</script>
+
+</html>
